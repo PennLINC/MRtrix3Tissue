@@ -158,7 +158,7 @@ class Tck2nodes_radial : public Tck2nodes_base { MEMALIGN(Tck2nodes_radial)
 
 
 // Do a reverse-search from the track endpoints inwards
-class Tck2nodes_revsearch : public Tck2nodes_base 
+class Tck2nodes_revsearch : public Tck2nodes_base
 { MEMALIGN (Tck2nodes_revsearch)
 
   public:
@@ -204,7 +204,7 @@ class Tck2nodes_forwardsearch : public Tck2nodes_base
     const default_type max_dist;
     const default_type angle_limit;
 
-    default_type get_cf (const Eigen::Vector3&, const Eigen::Vector3&, const voxel_type&) const;
+    default_type get_cf (const Eigen::Vector3d&, const Eigen::Vector3d&, const voxel_type&) const;
 
 };
 

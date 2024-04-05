@@ -301,7 +301,7 @@ namespace MR
                     return 0.0;
                 }
 
-                const Eigen::Vector3 pos = Eigen::Vector3(default_type(iter.index(0)), default_type(iter.index(0)), default_type(iter.index(0)));
+                const Eigen::Vector3d pos = Eigen::Vector3d(default_type(iter.index(0)), default_type(iter.index(0)), default_type(iter.index(0)));
 
                 params.processed_image.index(3) = 2;
                 default_type A = params.processed_image.value();
@@ -358,7 +358,7 @@ namespace MR
                   // params.processed_image.index(3) = 1;
                   // std::cerr << "val2: " << params.processed_image.value() << ", " << val2_scanner << ", " << val2 << std::endl;
                 // }
-                const Eigen::Vector3 midway_point = midway_v2s * pos;
+                const Eigen::Vector3d midway_point = midway_v2s * pos;
                 Eigen::MatrixXd jacobian = params.transformation.get_jacobian_wrt_params (midway_point);
                 for (ssize_t par = 0; par < gradient.size(); par++) {
                   default_type sum = 0.0;

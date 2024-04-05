@@ -100,8 +100,8 @@ namespace MR
 
             auto slice_encoding_it = H.keyval().find ("SliceEncodingDirection");
             if (slice_encoding_it != H.keyval().end()) {
-              const Eigen::Vector3 orig_dir (Axes::id2dir (slice_encoding_it->second));
-              Eigen::Vector3 new_dir;
+              const Eigen::Vector3d orig_dir (Axes::id2dir (slice_encoding_it->second));
+              Eigen::Vector3d new_dir;
               for (size_t axis = 0; axis != 3; ++axis)
                 new_dir[perm[axis]] = flip[perm[axis]] > 0 ? orig_dir[axis] : -orig_dir[axis];
               slice_encoding_it->second = Axes::dir2id (new_dir);
@@ -136,8 +136,8 @@ namespace MR
         }
         auto slice_encoding_it = H_adj.keyval().find ("SliceEncodingDirection");
         if (slice_encoding_it != H_adj.keyval().end() && axes_adjusted) {
-          const Eigen::Vector3 orig_dir (Axes::id2dir (slice_encoding_it->second));
-          Eigen::Vector3 new_dir;
+          const Eigen::Vector3d orig_dir (Axes::id2dir (slice_encoding_it->second));
+          Eigen::Vector3d new_dir;
           for (size_t axis = 0; axis != 3; ++axis)
             new_dir[order[axis]] = H.stride (order[axis]) > 0 ? orig_dir[order[axis]] : -orig_dir[order[axis]];
           slice_encoding_it->second = Axes::dir2id (new_dir);

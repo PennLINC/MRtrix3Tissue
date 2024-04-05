@@ -20,7 +20,7 @@
 
 #include "image.h"
 #include "algo/threaded_loop.h"
- 
+
 
 using namespace MR;
 using namespace App;
@@ -46,7 +46,7 @@ void run ()
   if (in1.ndim() != 4)
     throw Exception ("images \"" + in1.name() + "\" and \"" + in2.name() + "\" are not 4D");
   if (in1.size(3) % 3)
-    throw Exception ("images \"" + in1.name() + "\" and \"" + in2.name() + "\" do not contain XYZ peak directions");    
+    throw Exception ("images \"" + in1.name() + "\" and \"" + in2.name() + "\" do not contain XYZ peak directions");
   for (size_t i = 0; i < in1.ndim(); ++i) {
     if (std::isfinite (in1.size(i)))
       if (in1.size(i) != in2.size(i))
@@ -68,7 +68,7 @@ void run ()
   .run ([&tol] (decltype(in1)& a, decltype(in2)& b)
   {
     for (size_t i = 0; i != size_t(a.size(3)); i += 3) {
-      Eigen::Vector3 veca, vecb;
+      Eigen::Vector3d veca, vecb;
       for (size_t axis = 0; axis != 3; ++axis) {
         a.index(3) = b.index(3) = i + axis;
         veca[axis] = a.value();

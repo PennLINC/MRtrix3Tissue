@@ -95,7 +95,7 @@ void run ()
   DWI::Tractography::Streamline<float> tck;
 
   Transform transform (in_index_image);
-  Eigen::Vector3 voxel_pos;
+  Eigen::Vector3d voxel_pos;
 
   while (reader (tck)) {
     SetVoxelDir dixels;

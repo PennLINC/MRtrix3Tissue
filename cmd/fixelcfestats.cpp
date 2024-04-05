@@ -202,7 +202,7 @@ void run() {
       fixel2row[f] = f;
   }
 
-  vector<Eigen::Vector3> positions (num_fixels);
+  vector<Eigen::Vector3d> positions (num_fixels);
   vector<direction_type> directions (num_fixels);
 
   const std::string output_fixel_directory = argument[5];
@@ -213,7 +213,7 @@ void run() {
     // Load template fixel directions
     Transform image_transform (index_image);
     for (auto i = Loop ("loading template fixel directions and positions", index_image, 0, 3)(index_image); i; ++i) {
-      Eigen::Vector3 vox ((default_type)index_image.index(0), (default_type)index_image.index(1), (default_type)index_image.index(2));
+      Eigen::Vector3d vox ((default_type)index_image.index(0), (default_type)index_image.index(1), (default_type)index_image.index(2));
       vox = image_transform.voxel2scanner * vox;
       index_image.index(3) = 1;
       const index_type offset = index_image.value();

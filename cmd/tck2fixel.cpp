@@ -41,7 +41,7 @@ class TrackProcessor { MEMALIGN (TrackProcessor)
    using SetVoxelDir = DWI::Tractography::Mapping::SetVoxelDir;
 
    TrackProcessor (Image<uint32_t>& fixel_indexer,
-                   const vector<Eigen::Vector3>& fixel_directions,
+                   const vector<Eigen::Vector3d>& fixel_directions,
                    vector<uint16_t>& fixel_TDI,
                    const float angular_threshold):
      fixel_indexer (fixel_indexer) ,
@@ -63,7 +63,7 @@ class TrackProcessor { MEMALIGN (TrackProcessor)
          uint32_t last_index = first_index + num_fibres;
          uint32_t closest_fixel_index = 0;
          float largest_dp = 0.0;
-         const Eigen::Vector3 dir (i->get_dir().normalized());
+         const Eigen::Vector3d dir (i->get_dir().normalized());
          for (uint32_t j = first_index; j < last_index; ++j) {
            const float dp = abs (dir.dot (fixel_directions[j]));
            if (dp > largest_dp) {
@@ -83,7 +83,7 @@ class TrackProcessor { MEMALIGN (TrackProcessor)
 
  private:
    Image<uint32_t> fixel_indexer;
-   const vector<Eigen::Vector3>& fixel_directions;
+   const vector<Eigen::Vector3d>& fixel_directions;
    vector<uint16_t>& fixel_TDI;
    const float angular_threshold_dp;
 };
@@ -132,8 +132,8 @@ void run ()
 
   const float angular_threshold = get_option_value ("angle", DEFAULT_ANGLE_THRESHOLD);
 
-  vector<Eigen::Vector3> positions (num_fixels);
-  vector<Eigen::Vector3> directions (num_fixels);
+  vector<Eigen::Vector3d> positions (num_fixels);
+  vector<Eigen::Vector3d> directions (num_fixels);
 
   const std::string output_fixel_folder = argument[2];
   Fixel::copy_index_and_directions_file (input_fixel_folder, output_fixel_folder);
@@ -143,7 +143,7 @@ void run ()
     // Load template fixel directions
     Transform image_transform (index_image);
     for (auto i = Loop ("loading template fixel directions and positions", index_image, 0, 3)(index_image); i; ++i) {
-      const Eigen::Vector3 vox ((default_type)index_image.index(0), (default_type)index_image.index(1), (default_type)index_image.index(2));
+      const Eigen::Vector3d vox ((default_type)index_image.index(0), (default_type)index_image.index(1), (default_type)index_image.index(2));
       index_image.index(3) = 1;
       uint32_t offset = index_image.value();
       size_t fixel_index = 0;

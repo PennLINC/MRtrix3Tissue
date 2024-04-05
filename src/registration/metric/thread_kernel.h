@@ -102,11 +102,11 @@ namespace MR
               typename use_processed_image<U>::no = 0,
               typename cost_is_vector<U>::no = 0) {
 
-            Eigen::Vector3 voxel_pos ((default_type)iter.index(0), (default_type)iter.index(1), (default_type)iter.index(2));
+            Eigen::Vector3d voxel_pos ((default_type)iter.index(0), (default_type)iter.index(1), (default_type)iter.index(2));
 
-            Eigen::Vector3 midway_point = transform.voxel2scanner * voxel_pos;
+            Eigen::Vector3d midway_point = transform.voxel2scanner * voxel_pos;
 
-            Eigen::Vector3 im2_point;
+            Eigen::Vector3d im2_point;
             params.transformation.transform_half_inverse (im2_point, midway_point);
             if (params.im2_mask_interp) {
               params.im2_mask_interp->scanner (im2_point);
@@ -114,7 +114,7 @@ namespace MR
                 return;
             }
 
-            Eigen::Vector3 im1_point;
+            Eigen::Vector3d im1_point;
             params.transformation.transform_half (im1_point, midway_point);
             if (params.im1_mask_interp) {
               params.im1_mask_interp->scanner (im1_point);
@@ -140,11 +140,11 @@ namespace MR
               typename use_processed_image<U>::no = 0,
               typename cost_is_vector<U>::yes = 0) {
 
-            Eigen::Vector3 voxel_pos ((default_type)iter.index(0), (default_type)iter.index(1), (default_type)iter.index(2));
+            Eigen::Vector3d voxel_pos ((default_type)iter.index(0), (default_type)iter.index(1), (default_type)iter.index(2));
 
-            Eigen::Vector3 midway_point = transform.voxel2scanner * voxel_pos;
+            Eigen::Vector3d midway_point = transform.voxel2scanner * voxel_pos;
 
-            Eigen::Vector3 im2_point;
+            Eigen::Vector3d im2_point;
             params.transformation.transform_half_inverse (im2_point, midway_point);
             if (params.im2_mask_interp) {
               params.im2_mask_interp->scanner (im2_point);
@@ -152,7 +152,7 @@ namespace MR
                 return;
             }
 
-            Eigen::Vector3 im1_point;
+            Eigen::Vector3d im1_point;
             params.transformation.transform_half (im1_point, midway_point);
             if (params.im1_mask_interp) {
               params.im1_mask_interp->scanner (im1_point);
@@ -196,7 +196,7 @@ namespace MR
                 typename cost_is_vector<U>::no = 0) {
               assert(params.processed_image.valid());
 
-              Eigen::Vector3 voxel_pos ((default_type)iter.index(0), (default_type)iter.index(1), (default_type)iter.index(2));
+              Eigen::Vector3d voxel_pos ((default_type)iter.index(0), (default_type)iter.index(1), (default_type)iter.index(2));
 
               if (params.processed_mask.valid()){
                 assign_pos_of (iter, 0, 3).to (params.processed_mask);

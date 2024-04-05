@@ -99,7 +99,7 @@ struct PolyBasisFunction { MEMALIGN (PolyBasisFunction)
 
   const int n_basis_vecs = 20;
 
-  FORCE_INLINE Eigen::MatrixXd operator () (const Eigen::Vector3& pos) {
+  FORCE_INLINE Eigen::MatrixXd operator () (const Eigen::Vector3d& pos) {
     double x = pos[0];
     double y = pos[1];
     double z = pos[2];
@@ -134,7 +134,7 @@ struct PolyBasisFunction<0> { MEMALIGN (PolyBasisFunction<0>)
   const int n_basis_vecs = 1;
 
   PolyBasisFunction() {}
-  FORCE_INLINE Eigen::MatrixXd operator () (const Eigen::Vector3&) {
+  FORCE_INLINE Eigen::MatrixXd operator () (const Eigen::Vector3d&) {
     Eigen::MatrixXd basis(n_basis_vecs, 1);
     basis(0) = 1.0;
     return basis;
@@ -146,7 +146,7 @@ template <>
 struct PolyBasisFunction<1> { MEMALIGN (PolyBasisFunction<1>)
   const int n_basis_vecs = 4;
 
-  FORCE_INLINE Eigen::MatrixXd operator () (const Eigen::Vector3& pos) {
+  FORCE_INLINE Eigen::MatrixXd operator () (const Eigen::Vector3d& pos) {
     double x = pos[0];
     double y = pos[1];
     double z = pos[2];
@@ -164,7 +164,7 @@ template <>
 struct PolyBasisFunction<2> { MEMALIGN (PolyBasisFunction<2>)
   const int n_basis_vecs = 10;
 
-  FORCE_INLINE Eigen::MatrixXd operator () (const Eigen::Vector3& pos) {
+  FORCE_INLINE Eigen::MatrixXd operator () (const Eigen::Vector3d& pos) {
     double x = pos[0];
     double y = pos[1];
     double z = pos[2];
@@ -466,8 +466,8 @@ void run_primitive () {
     uint32_t index = 0;
     for (auto i = Loop (0, 3) (mask, combined_tissue); i; ++i) {
       if (mask.value()) {
-        Eigen::Vector3 vox (mask.index(0), mask.index(1), mask.index(2));
-        Eigen::Vector3 pos = transform.voxel2scanner * vox;
+        Eigen::Vector3d vox (mask.index(0), mask.index(1), mask.index(2));
+        Eigen::Vector3d pos = transform.voxel2scanner * vox;
         norm_field_basis.row (index) = basis_function (pos).col(0);
 
         double sum = 0.0;
@@ -483,8 +483,8 @@ void run_primitive () {
 
     // Generate normalisation field in the log domain
     for (auto i = Loop (0, 3) (norm_field_log); i; ++i) {
-      Eigen::Vector3 vox (norm_field_log.index(0), norm_field_log.index(1), norm_field_log.index(2));
-      Eigen::Vector3 pos = transform.voxel2scanner * vox;
+      Eigen::Vector3d vox (norm_field_log.index(0), norm_field_log.index(1), norm_field_log.index(2));
+      Eigen::Vector3d pos = transform.voxel2scanner * vox;
       norm_field_log.value() = basis_function (pos).col(0).dot (norm_field_weights.col(0));
     }
 

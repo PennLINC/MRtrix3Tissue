@@ -30,9 +30,9 @@ namespace MR
         public:
           template <class Params>
             default_type operator() (Params& params,
-                                     const Eigen::Vector3& im1_point,
-                                     const Eigen::Vector3& im2_point,
-                                     const Eigen::Vector3& midway_point,
+                                     const Eigen::Vector3d& im1_point,
+                                     const Eigen::Vector3d& im2_point,
+                                     const Eigen::Vector3d& midway_point,
                                      Eigen::Matrix<default_type, Eigen::Dynamic, 1>& gradient) {
 
               typename Params::Im1ValueType im1_value;
@@ -63,9 +63,9 @@ namespace MR
         public:
           template <class Params>
             default_type operator() (Params& params,
-                                     const Eigen::Vector3& im1_point,
-                                     const Eigen::Vector3& im2_point,
-                                     const Eigen::Vector3& midway_point,
+                                     const Eigen::Vector3d& im1_point,
+                                     const Eigen::Vector3d& im2_point,
+                                     const Eigen::Vector3d& midway_point,
                                      Eigen::Matrix<default_type, Eigen::Dynamic, 1>& gradient) {
 
               typename Params::Im1ValueType im1_value;
@@ -90,9 +90,9 @@ namespace MR
             MeanSquared4D ( ) {}
             template <class Params>
             default_type operator() (Params& params,
-                                     const Eigen::Vector3& im1_point,
-                                     const Eigen::Vector3& im2_point,
-                                     const Eigen::Vector3& midway_point,
+                                     const Eigen::Vector3d& im1_point,
+                                     const Eigen::Vector3d& im2_point,
+                                     const Eigen::Vector3d& midway_point,
                                      Eigen::Matrix<default_type, Eigen::Dynamic, 1>& gradient) {
 
               const ssize_t volumes = params.im1_image_interp->size(3);
@@ -139,9 +139,9 @@ namespace MR
 
             template <class Params>
               default_type operator() (Params& params,
-                                     const Eigen::Vector3& im1_point,
-                                     const Eigen::Vector3& im2_point,
-                                     const Eigen::Vector3& midway_point,
+                                     const Eigen::Vector3d& im1_point,
+                                     const Eigen::Vector3d& im2_point,
+                                     const Eigen::Vector3d& midway_point,
                                      Eigen::Matrix<default_type, Eigen::Dynamic, 1>& gradient) {
                 const ssize_t volumes = params.im1_image_interp->size(3);
 
@@ -186,9 +186,9 @@ namespace MR
 
             template <class Params>
               Eigen::Matrix<default_type, Eigen::Dynamic, 1> operator() (Params& params,
-                                     const Eigen::Vector3& im1_point,
-                                     const Eigen::Vector3& im2_point,
-                                     const Eigen::Vector3& midway_point,
+                                     const Eigen::Vector3d& im1_point,
+                                     const Eigen::Vector3d& im2_point,
+                                     const Eigen::Vector3d& midway_point,
                                      Eigen::Matrix<default_type, Eigen::Dynamic, 1>& gradient) {
 
               im1_values = params.im1_image_interp->row (3);

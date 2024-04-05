@@ -29,7 +29,7 @@ namespace MR
     namespace Metric
     {
 
-      template <class Im1ImageType, class Im2ImageType, class Im1MaskType, class Im2MaskType> 
+      template <class Im1ImageType, class Im2ImageType, class Im1MaskType, class Im2MaskType>
       class Demons4D { MEMALIGN(Demons4D<Im1ImageType,Im2ImageType,Im1MaskType,Im2MaskType>)
         public:
           Demons4D (default_type& global_energy, size_t& global_voxel_count,
@@ -104,7 +104,7 @@ namespace MR
 
             assign_pos_of (im1_image, 0, 3).to (im1_gradient, im2_gradient);
 
-            Eigen::Vector3 total_update = Eigen::Vector3::Zero();
+            Eigen::Vector3d total_update = Eigen::Vector3d::Zero();
             for (ssize_t vol = 0; vol < im1_image.size(3); ++vol) {
               im2_image.index(3) = vol;
               im1_image.index(3) = vol;

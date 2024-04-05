@@ -264,7 +264,7 @@ namespace MR {
 
             // Revise multiple peaks if present
             for (size_t peak_index = 0; peak_index != i->num_peaks(); ++peak_index) {
-              Eigen::Vector3 newton_peak = i->get_peak_dir (peak_index);
+              Eigen::Vector3d newton_peak = i->get_peak_dir (peak_index);
               const default_type newton_peak_value = Math::SH::get_peak (in, lmax, newton_peak, &(*precomputer));
               if (std::isfinite (newton_peak_value) && newton_peak.allFinite()) {
 
